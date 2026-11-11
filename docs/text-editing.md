@@ -1,6 +1,6 @@
 # VS Code 与 Obsidian 文本编辑统一方案
 
-文档类型：当前方案与应用指南。更新日期：2026-11-09（Asia/Shanghai）。本文件负责正文编辑的意图、取舍与应用方法；整体进展维护于 [README](../README.md#当前状态)。配置项以所链接的 JSON 和脚本为准。
+文档类型：当前方案与应用指南。更新日期：2026-11-11（Asia/Shanghai）。本文件负责正文编辑的意图、取舍与应用方法，并单列 Shell 命令行编辑约定；整体进展维护于 [README](../README.md#当前状态)。配置项以所链接的 JSON 和脚本为准。
 
 ## 当前目标与状态
 
@@ -40,6 +40,22 @@
 整行删除组合的主要理由是保留 VS Code 的现成功能与默认键位。代价是三个修饰 / 主键的记忆负担、本机 Kimi 冲突及 Obsidian 重绑定，因此仍是待应用验证的统一候选。不能把 K 的某个英文联想当成设计来源，也不能声称 Shift 是对 Command + K 的删除扩展。剪切会改变剪贴板，删除到行首只删除光标左侧；两者都不能直接替代不改变剪贴板的整行删除。
 
 选择依据的权重是系统习惯、用户已有的高频习惯、跨 App 适配成本与语义可推导性共同决定的。当前方案允许少量明确标注的惯例例外，不能把这些例外说成全部可以从一套修饰键语法推导。上述 macOS 约定见 [Apple 说明](https://support.apple.com/en-us/102650)，编辑器惯例见 [VS Code 默认键位](https://code.visualstudio.com/docs/reference/default-keybindings)。
+
+## zsh 命令行编辑
+
+终端编辑按 zsh 的默认 Emacs 键位模式记录。`Ctrl` 对应 `⌃`；VS Code 集成终端中的 zsh 也使用这套约定。
+
+| 快捷键 | 操作 | 选择依据与边界 |
+| --- | --- | --- |
+| `Ctrl+U` | 删除当前整行，包括光标右侧 | 沿用 `kill-whole-line`；清空单行命令的直接入口 |
+| `Ctrl+K` | 删除光标到当前行行尾的内容 | 沿用 `kill-line`；已在行尾时可能删除换行 |
+| `Ctrl+A` | 移动到当前行行首 | 沿用行首导航约定，与行尾导航配对记忆 |
+| `Ctrl+E` | 移动到当前行行尾 | 沿用行尾导航约定；E 可辅助联想 End |
+| `Ctrl+A` → `Ctrl+K` | 清空当前行内容 | 先到行首再向右删除；箭头表示先后按下，不是同时按键 |
+
+单行命令可以直接用 `Ctrl+U` 清空，也可以组合使用 `Ctrl+A` → `Ctrl+K`。多行输入时，上述操作针对当前行。删除内容可通过 `Ctrl+Y` 从 zsh 的 kill buffer / kill ring 取回，与 macOS 系统剪贴板不同。
+
+来源：[Zsh Line Editor](https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html)。核对记录（2026-11-11）：通过本机 `zsh -f` 查询上述四个单键组合的内置 Emacs keymap，结果与表中约定一致；未加载用户配置或修改 Shell 设置。
 
 ## 需要解决的冲突
 
