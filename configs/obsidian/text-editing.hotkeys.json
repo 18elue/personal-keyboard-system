@@ -1,0 +1,21 @@
+{
+  "editor:toggle-checklist-status": [],
+  "editor:delete-paragraph": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "K"
+    }
+  ],
+  "editor:swap-line-up": [
+    {
+      "modifiers": ["Alt"],
+      "key": "ArrowUp"
+    }
+  ],
+  "editor:swap-line-down": [
+    {
+      "modifiers": ["Alt"],
+      "key": "ArrowDown"
+    }
+  ]
+}
